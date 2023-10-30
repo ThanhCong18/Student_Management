@@ -162,6 +162,33 @@ void XepLoaiSV_N( sv_info_t *sv ,int num )
     printf("-------------------\n");
 }
 
+void ThemSV(sv_info_t *sv , int num , int pos)
+{
+    for ( int i = num - 1 ; i > pos ; i--){
+        sv[i] = sv[i-1];
+    }
+    sv[pos] = NhapSv();
+    num++;
+}
+
+void XoaSV(sv_info_t *sv , int num , int *pos)
+{
+    printf("Nhap vi tri SV can xoa : ");
+    scanf("%d" , pos);
+    for ( int i = num - 1 ; i >= *pos ; i--){
+        sv[i] = sv[i+1];
+    }
+    num--;
+}
+
+void SuaSV(sv_info_t *sv , int num , int pos)
+{
+    for ( int i = 0 ; i < num ; i++){
+        if( i == pos){
+            sv[pos] = NhapSv();
+        }
+    }
+}
 
 char menu()
 {
@@ -174,8 +201,11 @@ char menu()
     printf("5.Ghi thong tin sinh vien vao file :\n");
     printf("6.Doc thong tin sinh vien tu file :\n");
     printf("7.Xep loai sinh vien theo diemtb :\n");
+    printf("8.Them sinh vien vao danh sach quan ly:\n");
+    printf("9.Xoa sinh vien khoi danh sach quan ly:\n");
+    printf("a.Sua sinh vien trong danh sach quan ly:\n");
     printf("------------------------------------\n");
-    while( function < '1' || function > '7')
+    while( function < '1' || function > 'a')
     {
         printf("Ban Hay Nhap lua chon so : ");
         fflush(stdin);
@@ -186,7 +216,7 @@ char menu()
 int main()
 {
     sv_info_t sv_arr[100] ;
-    int numbersv = 0 ;
+    int numbersv = 0 , pos;
     char dir[] = "G:\\xu_ly_File\\A.txt";
     char function1 ;
     DocFile(sv_arr,&numbersv,dir);
@@ -228,10 +258,29 @@ int main()
             XepLoaiSV_N(sv_arr,numbersv);
             getch();
             break ;
+            case '8':
+            printf("Nhap vi tri can them SV : ");
+            scanf("%d" , &pos);
+            i = pos ;
+            ThemSV(sv_arr,numbersv,pos);
+            numbersv++; // increase numbersv in array .
+            getch();
+            break ;
+            case '9':
+            XoaSV(sv_arr,numbersv,&pos);
+            numbersv--; // decrease numbersv in array .
+            getch();
+            break ;
+            case 'a':
+            printf("Nhap vi tri SV can sua : ");
+            scanf("%d" , &pos);
+            i = pos ;  // reset number i = pos .
+            SuaSV(sv_arr,numbersv,pos);
+            getch();
+            break ;
         }
     }
     return 0 ;
 }
-
 
 
