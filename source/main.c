@@ -14,10 +14,7 @@ typedef struct
     float diemanh;
     float diemtb ;
 } sv_info_t;
-
-//sv_info_t sv_arr[100] ; // quan ly tat ca sinh vien
 int i = 0 ;
-
 sv_info_t NhapSv(void)
 {
     sv_info_t sv ; // number 1 student .
@@ -35,7 +32,6 @@ sv_info_t NhapSv(void)
     printf("Nhap diem :");
     scanf("%f %f %f", &sv.diemtoan , &sv.diemvan , &sv.diemanh);
     sv.diemtb = (sv.diemtoan + sv.diemvan + sv.diemanh)/3;
-    //numbersv++;
     i++;
     return sv ;
 }
@@ -133,7 +129,6 @@ void DocFile(sv_info_t *sv_1 , int *numbersv , char dir[])
     *numbersv = dem ;
 }
 
-// xep loai 1 sv .
 void XepLoaiSV( sv_info_t sv )
 {
     if(sv.diemtb >= 8){
@@ -215,7 +210,7 @@ char menu()
 }
 int main()
 {
-    sv_info_t sv_arr[100] ;
+    sv_info_t sv_arr[100] ; // all student .
     int numbersv = 0 , pos;
     char dir[] = "G:\\xu_ly_File\\A.txt";
     char function1 ;
